@@ -57,3 +57,13 @@
   font-size:80px;
   text-anchor: middle;
 }
+
+/* sets the opacity of non-active text elements */
+#sections > section{
+	opacity: .3
+}
+
+/* gives a fully colored active item text */
+#sections section.graph-scroll-active{
+	opacity: 1;
+}
