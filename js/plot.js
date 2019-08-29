@@ -17,25 +17,34 @@ function setChartScale(){
 d3.select(window).on('resize.calcScale', _.debounce(setChartScale, 200))
 setChartScale()
 
-// create svg element
-var svg = d3.select('#map')
-            .append('svg')
-            .attr('width', width)
-            .attr('height', height);
+;(function(){
 
-var x_scale = d3.scaleBand()
-                .domain(d3.range(data.length))
-                .rangeRound([0, width])
-                .paddingInner(0.05);
+  var x_scale = d3.scaleBand()
+                  .domain(d3.range(data.length))
+                  .rangeRound([0, width])
+                  .paddingInner(0.05);
 
-var y_scale = d3.scaleLinear()
-                .domain([
-                  0,
-                  d3.max(data, function(d){
-                    return d;
-                  })
-                ])
-                .range([0, height]);
+  var y_scale = d3.scaleLinear()
+                  .domain([
+                    0,
+                    d3.max(data, function(d){
+                      return d;
+                    })
+                  ])
+                  .range([0, height]);
+
+  // create svg element
+  var svg = d3.select('#map')
+              .append('svg')
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom);
+});
+
+
+
+
+
+
 
 plots[0] = firstPlot();
 plots[1] = secondPlot();
