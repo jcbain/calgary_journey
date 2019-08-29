@@ -59,11 +59,11 @@
 }
 
 /* sets the opacity of non-active text elements */
-#sections > section{
+#sections > div{
 	opacity: .3
 }
 
 /* gives a fully colored active item text */
-#sections section.graph-scroll-active{
+#sections div.graph-scroll-active{
 	opacity: 1;
 }

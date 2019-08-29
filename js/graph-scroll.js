@@ -54,7 +54,7 @@
       var startPos
       sections.each(function(d, i){
         if (!i) startPos = this.getBoundingClientRect().top
-        sectionPos.push(this.getBoundingClientRect().top -  startPos) 
+        sectionPos.push(this.getBoundingClientRect().top -  startPos)
       })
 
       var containerBB = container.node().getBoundingClientRect()
@@ -132,7 +132,7 @@
           .on('scroll.gscroll'  + eventId, reposition)
           .on('resize.gscroll'  + eventId, resize)
           .on('keydown.gscroll' + eventId, keydown)
-      
+
       resize()
       if (window['gscrollTimer' + eventId]) window['gscrollTimer' + eventId].stop()
       window['gscrollTimer' + eventId] = d3.timer(reposition);
@@ -144,10 +144,10 @@
       var value = dispatch.on.apply(dispatch, arguments);
       return value === dispatch ? rv : value;
     }
-    
+
     rv.offset = function(_x) {
       if(!_x) return offset
-      
+
       offset = _x
       return rv
     }
