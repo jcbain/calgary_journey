@@ -2,9 +2,20 @@
 var data = [ 1, 2, 3, 4];
 
 // define constants
-var height = 400,
-    width = 800
-    plots = [];
+function setChartScale(){
+  var width = Math.min(890, window.innerWidth - 240)
+  d3.select('#map')
+      .style('transform', 'scale(' + width/890 +')')
+      .style('-webkit-transform', 'scale(' + width/890 +')')
+      .style('-moz-transform', 'scale(' + width/890 +')')
+      .style('-o-transform', 'scale(' + width/890 +')')
+      .style('-ms-transform', 'scale(' + width/890 +')')
+      .style('margin-left', -(890-width)/2 + 'px')
+      .style('margin-top' , -(890-width)/3 + 'px')
+
+}
+d3.select(window).on('resize.calcScale', _.debounce(setChartScale, 200))
+setChartScale()
 
 // create svg element
 var svg = d3.select('#map')
