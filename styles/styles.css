@@ -1,69 +1,32 @@
+body {
+    max-width: 900px;
+    margin: 0px auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .container {
-  width: 890px;
+  position: relative;
 }
 
-#graphic {
-  padding-top: 60px;
+#map{
+  margin-left: 40px;
+  width: 500px;
+  position: sticky;
+  top: 0px;
+  float: right;
 }
-
 
 #sections {
-  position: relative;
-  display: inline-block;
-  width: 250px;
-  top: 0px;
-  z-index: 90;
-  padding-bottom: 200px;
-}
-
-.step {
-  margin-bottom: 200px;
-  font-family: "TiemposTextWeb-Regular","Georgia";
-  font-size: 16px;
-  line-height: 23px;
-  color: #767678;
-}
-
-#sections .title {
-  font-family: Arial,Helvetica,"san-serif";
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 2px;
-  color: #262626;
-  line-height: 1.2em;
-}
-
-#extra-space {
-  height: 300px;
-}
-
-#map {
-  display: inline-block;
-  position: fixed;
-  top: 60px;
-  z-index: 1;
-  margin-left: 0;
-  /* height: 600px; */
-  /* width: 600px; */
-  /* background-color: #ddd; */
-}
-
-#map .title {
-  font-size:120px;
-  text-anchor: middle;
-}
-
-#map .sub-title {
-  font-size:80px;
-  text-anchor: middle;
+  width: 340px;
 }
 
 /* sets the opacity of non-active text elements */
 #sections > div{
-	opacity: .3
+  background: white;
+	opacity: .2;
+  margin-bottom: 240px;
 }
 
-/* gives a fully colored active item text */
-#sections div.graph-scroll-active{
-	opacity: 1;
+#sections > div.graph-scroll-active {
+    opacity: 1;
 }

@@ -1,11 +1,19 @@
+var oldWidth = 0
 function render(){
+  if (oldWidth == innerWidth) return
+  oldWidth = innerWidth
+
+  var chart_width = chart_height = d3.select('#map').node().offsetWidth
+  var r = 40
+
+
+  if (innerWidth <= 925){
+    chart_width = innerWidth
+    chart_height = innerHeight*.7
+  }
+
 // dummy data
     var data = [ 1, 2, 3, 4];
-
-    // define constants
-    var chart_width = 800,
-        chart_height = 600,
-        bar_padding = 5;
 
     var svg = d3.select('#map').html('')
           .append('svg')
@@ -55,94 +63,3 @@ function render(){
 };
 render()
 d3.select(window).on('resize', render);
-
-
-// var barplot = svg.selectAll('rect')
-//    .data(data)
-//    .enter()
-//    .append('rect')
-//    .attr('x', function(d,i){
-//        return x_scale(i);
-//    })
-//    .attr('y', function(d){
-//        return chart_height - y_scale(d);
-//    })
-//    .attr('width', x_scale.bandwidth())
-//    .attr('height', function(d){
-//        return y_scale(d);
-//    })
-//    .attr('fill', '#7ED26D');
-//
-// function changeColors(){
-//   barplot.transtion()
-//     .data(data)
-//     .attr('#e2fa1f');
-// };
-//
-// var updateFunctions = d3.range(d3.selectAll('#sections > section').size())
-//     .map(function(){ return function(){} });
-//
-// updateFunctions[1] = changeColors;
-//
-// d3.graphScroll()
-//   .sections(d3.selectAll('#sections > section'))
-//   .on('active', function(i){
-//     return updateFunctions[i];
-//   });
-
-//
-//
-//
-//
-//
-//
-// plots[0] = firstPlot();
-// plots[1] = secondPlot();
-//
-// function firstPlot(){
-//   var plot = svg.selectAll('rect')
-//      .data(data)
-//      .enter()
-//      .append('rect')
-//      .attr('x', function(d,i){
-//        return x_scale(i);
-//      })
-//      .attr('y', function(d){
-//        return height - y_scale(d);
-//      })
-//      .attr('width', x_scale.bandwidth())
-//      .attr('height', function(d){
-//        return y_scale(d);
-//      })
-//      .attr('fill', '#7ED26D');
-//
-//      return plot
-// };
-//
-// function secondPlot(){
-//   var plot2 = svg.selectAll('text')
-//      .data(data)
-//      .enter()
-//      .append('text')
-//      .text(function(d){
-//        return d;
-//      })
-//      .attr('x', function(d, i){
-//        return x_scale(i) + x_scale.bandwidth() / 2;
-//      })
-//      .attr('y', function(d){
-//        return height - y_scale(d) + 15;
-//      })
-//      .attr( 'font-size', 14 )
-//      .attr( 'fill', '#fff' )
-//      .attr( 'text-anchor', 'middle' );
-//
-//      return plot2
-// };
-//
-//
-// d3.graphScroll()
-//   .sections(d3.selectAll('#sections > section'))
-//   .on('active', function(i){
-//     return plots[i];
-//   });
