@@ -31,35 +31,130 @@ function render(){
                     })])
                     .range([0, chart_height]);
 
-    var bars = svg.selectAll('rect')
-                  .data(data)
-                  .enter()
-                  .append('rect')
-                  .attr('x', function(d,i){
-                      return x_scale(i);
-                  })
-                  .attr('y', function(d){
-                      return chart_height - y_scale(d);
-                  })
-                  .attr('width', x_scale.bandwidth())
-                  .attr('height', function(d){
-                      return y_scale(d);
-                  })
-                  .attr('fill', '#7ED26D');
+    // var bars = svg.selectAll('rect')
+    //               .data(data)
+    //               .enter()
+    //               .append('rect')
+    //               .attr('x', function(d,i){
+    //                   return x_scale(i);
+    //               })
+    //               .attr('y', function(d){
+    //                   return chart_height - y_scale(d);
+    //               })
+    //               .attr('width', x_scale.bandwidth())
+    //               .attr('height', function(d){
+    //                   return y_scale(d);
+    //               })
+    //               .attr('fill', '#7ED26D');
 
+    svg.selectAll('.bars')
+       .data(data)
+       .enter()
+       .append('rect')
+       .attr("class", "bar")
+       .attr('x', function(d,i){
+           return x_scale(i);
+       })
+       .attr('y', function(d){
+           return chart_height - y_scale(d);
+       })
+       .attr('width', x_scale.bandwidth())
+       .attr('height', function(d){
+           return y_scale(d);
+       })
+       .attr('fill', '#7ED26D');
 
-    var colors = ['orange', 'purple', 'steelblue', 'pink', 'black']
-    var gs = d3.graphScroll()
-        .container(d3.select('.container-1'))
-        .graph(d3.selectAll('container-1 #map'))
-        .eventId('uniqueId1')  // namespace for scroll and resize events
-        .sections(d3.selectAll('.container-1 #sections > div'))
-        // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
-        .on('active', function(i){
-          bars.transition().duration(100)
-            .transition()
-              .style('fill', colors[i])
+    function firstAction(){
+      d3.selectAll('.bar').transition('color').duration(1200).style("fill","#6488FF");
+    }
+
+    // need to set an option as a parameter that switches that will revert to
+    // previous graph
+    function secondAction(){
+      var new_num = Math.floor(Math.random() * d3.max(data));
+      data.push( new_num );
+
+      // Update scales
+      x_scale.domain(d3.range(data.length));
+      y_scale.domain([0, d3.max(data, function(d){
+        return d;
+      })]);
+
+      var bars = svg.selectAll('.bar').data(data);
+
+        bars.enter()
+        .append('rect')
+        .attr('x', function(d, i){
+          return x_scale(i);
         })
+        .attr('y', chart_height)
+        .attr('width', x_scale.bandwidth())
+        // the height starting at 0 is for animation purposes
+        // we want it to start at 0 and then grow to its height
+        .attr('height', 0)
+        .attr('fill', '#7ED26D')
+        .merge(bars)
+        .transition()
+        .duration(1000)
+        .attr('x', function(d, i){
+          return x_scale(i);
+        })
+        .attr('y', function(d){
+          return chart_height - y_scale(d);
+        })
+        .attr('width', x_scale.bandwidth())
+        .attr('height', function(d){
+          return y_scale(d);
+        })
+        // .attr('opacity', bar_opacity);
+    };
+
+    var updateFunctions = d3.range(d3.selectAll('#sections > div').size())
+        .map(function(){ return function(){} });
+
+    updateFunctions[0] = firstAction;
+    updateFunctions[1] = secondAction;
+
+    var lastI = -1
+    var activeI = 0
+    d3.graphScroll()
+      .container(d3.select('.container-1'))
+      .graph(d3.selectAll('container-1 #map'))
+      .eventId('uniqueId1')  // namespace for scroll and resize events
+      .sections(d3.selectAll('.container-1 #sections > div'))
+      .on('active', function(i){
+        activeI = i
+
+        //call all fns last and active index
+        var sign = activeI - lastI < 0 ? -1 : 1
+        // d3.range(lastI + sign, activeI + sign, sign).forEach(function(i){
+        //   updateFunctions[i]()
+        // })
+        updateFunctions[activeI]()
+
+        lastI = activeI
+
+        // d3.selectAll('#sections > div')
+        //   .transition().duration(function(d, i){ return i == activeI ? 0 : 600 })
+        //     .style('opacity', function(d, i){
+        //       return i == activeI ? 1 : i == activeI + 1 ? .2 : .001 })
+
+      })
+      .sections(d3.selectAll('#sections > div'))
+
+
+    // var colors = ['orange', 'purple', 'steelblue', 'pink', 'black']
+    // var gs = d3.graphScroll()
+    //     .container(d3.select('.container-1'))
+    //     .graph(d3.selectAll('container-1 #map'))
+    //     .eventId('uniqueId1')  // namespace for scroll and resize events
+    //     .sections(d3.selectAll('.container-1 #sections > div'))
+    //     // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+    //     .on('active', function(i){
+    //       bars.transition().duration(100)
+    //         .transition()
+    //           .style('fill', colors[i])
+    //     })
 };
 render()
 d3.select(window).on('resize', render);
