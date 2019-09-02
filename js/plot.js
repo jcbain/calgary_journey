@@ -31,42 +31,31 @@ function render(){
                     })])
                     .range([0, chart_height]);
 
-    // var bars = svg.selectAll('rect')
-    //               .data(data)
-    //               .enter()
-    //               .append('rect')
-    //               .attr('x', function(d,i){
-    //                   return x_scale(i);
-    //               })
-    //               .attr('y', function(d){
-    //                   return chart_height - y_scale(d);
-    //               })
-    //               .attr('width', x_scale.bandwidth())
-    //               .attr('height', function(d){
-    //                   return y_scale(d);
-    //               })
-    //               .attr('fill', '#7ED26D');
 
     function firstAction(revert=false){
-
-
-      svg.selectAll('.bars')
-         .data(data)
-         .enter()
-         .append('rect')
-         .attr("class", "bar")
-         .attr('x', function(d,i){
-             return x_scale(i);
-         })
-         .attr('y', function(d){
-             return chart_height - y_scale(d);
-         })
-         .attr('width', x_scale.bandwidth())
-         .attr('height', function(d){
-             return y_scale(d);
-         })
-         .attr('fill', '#7ED26D');
-
+      if(revert){
+        svg.selectAll('.bars')
+          .transition()
+          .duration(1200)
+          .style("fill",'#7ED26D')
+      }else{
+        svg.selectAll('.bars')
+               .data(data)
+               .enter()
+               .append('rect')
+               .attr("class", "bars")
+               .attr('x', function(d,i){
+                   return x_scale(i);
+               })
+               .attr('y', function(d){
+                   return chart_height - y_scale(d);
+               })
+               .attr('width', x_scale.bandwidth())
+               .attr('height', function(d){
+                   return y_scale(d);
+               })
+               .attr('fill', '#7ED26D');
+             }
     }
 
 
@@ -81,7 +70,7 @@ function render(){
         })]);
       }
 
-      d3.selectAll('.bar')
+      svg.selectAll('.bars')
         .transition('color')
         .duration(1200)
         .style("fill","#6488FF")
@@ -109,7 +98,7 @@ function render(){
         return d;
       })]);
 
-      var bars = svg.selectAll('.bar').data(data);
+      var bars = svg.selectAll('.bars').data(data);
 
         bars.enter()
         .append('rect')
@@ -155,10 +144,11 @@ function render(){
       .sections(d3.selectAll('.container-1 #sections > div'))
       .on('active', function(i){
         activeI = i
+        console.log("active element: " + activeI)
 
         //call all fns last and active index
         var sign = activeI - lastI < 0 ? -1 : 1
-        console.log(sign)
+        console.log("   " + sign)
         // d3.range(lastI + sign, activeI + sign, sign).forEach(function(i){
         //   updateFunctions[i]()
         // })
