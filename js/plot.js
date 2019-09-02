@@ -47,30 +47,59 @@ function render(){
     //               })
     //               .attr('fill', '#7ED26D');
 
-    svg.selectAll('.bars')
-       .data(data)
-       .enter()
-       .append('rect')
-       .attr("class", "bar")
-       .attr('x', function(d,i){
-           return x_scale(i);
-       })
-       .attr('y', function(d){
-           return chart_height - y_scale(d);
-       })
-       .attr('width', x_scale.bandwidth())
-       .attr('height', function(d){
-           return y_scale(d);
-       })
-       .attr('fill', '#7ED26D');
+    function firstAction(revert=false){
 
-    function firstAction(){
-      d3.selectAll('.bar').transition('color').duration(1200).style("fill","#6488FF");
+
+      svg.selectAll('.bars')
+         .data(data)
+         .enter()
+         .append('rect')
+         .attr("class", "bar")
+         .attr('x', function(d,i){
+             return x_scale(i);
+         })
+         .attr('y', function(d){
+             return chart_height - y_scale(d);
+         })
+         .attr('width', x_scale.bandwidth())
+         .attr('height', function(d){
+             return y_scale(d);
+         })
+         .attr('fill', '#7ED26D');
+
+    }
+
+
+    function secondAction(revert=false){
+      if(revert){
+        data.pop()
+        d3.selectAll('.remove').remove();
+        // Update scales
+        x_scale.domain(d3.range(data.length));
+        y_scale.domain([0, d3.max(data, function(d){
+          return d;
+        })]);
+      }
+
+      d3.selectAll('.bar')
+        .transition('color')
+        .duration(1200)
+        .style("fill","#6488FF")
+        .attr('x', function(d,i){
+            return x_scale(i);
+        })
+        .attr('y', function(d){
+            return chart_height - y_scale(d);
+        })
+        .attr('width', x_scale.bandwidth())
+        .attr('height', function(d){
+            return y_scale(d);
+        });
     }
 
     // need to set an option as a parameter that switches that will revert to
     // previous graph
-    function secondAction(){
+    function thirdAction(revert=false){
       var new_num = Math.floor(Math.random() * d3.max(data));
       data.push( new_num );
 
@@ -88,6 +117,7 @@ function render(){
           return x_scale(i);
         })
         .attr('y', chart_height)
+        .classed('remove', true)
         .attr('width', x_scale.bandwidth())
         // the height starting at 0 is for animation purposes
         // we want it to start at 0 and then grow to its height
@@ -114,6 +144,7 @@ function render(){
 
     updateFunctions[0] = firstAction;
     updateFunctions[1] = secondAction;
+    updateFunctions[2] = thirdAction;
 
     var lastI = -1
     var activeI = 0
@@ -127,9 +158,14 @@ function render(){
 
         //call all fns last and active index
         var sign = activeI - lastI < 0 ? -1 : 1
+        console.log(sign)
         // d3.range(lastI + sign, activeI + sign, sign).forEach(function(i){
         //   updateFunctions[i]()
         // })
+        if(sign == -1){
+          var revert_yes = true;
+          updateFunctions[activeI](revert = revert_yes)
+        }
         updateFunctions[activeI]()
 
         lastI = activeI
