@@ -1,15 +1,15 @@
 var oldWidth = 0
-function render(){
-  if (oldWidth == innerWidth) return
+function render () {
+  if (oldWidth === innerWidth) return
   oldWidth = innerWidth
 
-  var chart_width = chart_height = d3.select('#map').node().offsetWidth
+  var chartWidth = chartHeight = d3.select('#map').node().offsetWidth
   var r = 40
 
 
   if (innerWidth <= 925){
-    chart_width = innerWidth
-    chart_height = innerHeight*.7
+    chartWidth = innerWidth
+    chartHeight = innerHeight*.7
   }
 
 // dummy data
@@ -17,11 +17,12 @@ function render(){
 
     var svg = d3.select('#map').html('')
           .append('svg')
-            .attrs({width: chart_width, height: chart_height})
+          .attrs({width: chartWidth,
+                  height: chartHeight})
 
     var x_scale = d3.scaleBand()
                     .domain(d3.range(data.length))
-                    .rangeRound([0, chart_width])
+                    .rangeRound([0, chartWidth])
                     // multiply the number returned by the number passed in
                     .paddingInner(0.05);
 
@@ -29,7 +30,7 @@ function render(){
                     .domain([0, d3.max(data, function(d){
                       return d;
                     })])
-                    .range([0, chart_height]);
+                    .range([0, chartHeight]);
 
 
     function firstAction(revert=false){
@@ -48,7 +49,7 @@ function render(){
                    return x_scale(i);
                })
                .attr('y', function(d){
-                   return chart_height - y_scale(d);
+                   return chartHeight - y_scale(d);
                })
                .attr('width', x_scale.bandwidth())
                .attr('height', function(d){
@@ -78,7 +79,7 @@ function render(){
             return x_scale(i);
         })
         .attr('y', function(d){
-            return chart_height - y_scale(d);
+            return chartHeight - y_scale(d);
         })
         .attr('width', x_scale.bandwidth())
         .attr('height', function(d){
@@ -86,8 +87,6 @@ function render(){
         });
     }
 
-    // need to set an option as a parameter that switches that will revert to
-    // previous graph
     function thirdAction(revert=false){
       var new_num = Math.floor(Math.random() * d3.max(data));
       data.push( new_num );
@@ -105,7 +104,7 @@ function render(){
         .attr('x', function(d, i){
           return x_scale(i);
         })
-        .attr('y', chart_height)
+        .attr('y', chartHeight)
         .classed('remove', true)
         .attr('width', x_scale.bandwidth())
         // the height starting at 0 is for animation purposes
@@ -119,7 +118,7 @@ function render(){
           return x_scale(i);
         })
         .attr('y', function(d){
-          return chart_height - y_scale(d);
+          return chartHeight - y_scale(d);
         })
         .attr('width', x_scale.bandwidth())
         .attr('height', function(d){
