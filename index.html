@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>To Calgary</title>
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet"> 
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Scrollama: Sticky Overlay Example</title>
+	<meta name="description" content="Scrollama: Sticky Overlay Example">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel='stylesheet' href='styles/style.css'>
 </head>
+
 <body>
-    <div id="chart"></div>
-    <!-- <button type="button" class="add" id="download">Add</button> -->
-    <script src="https://d3js.org/d3.v5.js"></script>
-    <script src="js/app.js"></script>
+	<main>
+		<section id='intro'>
+			<h1 class='intro__hed'>Journey to Calgary</h1>
+			<p class='intro__dek'>
+				This summer, we packed up and moved to Calgary. This is a little visual documentation of our journey.
+			</p>
+		</section>
+
+		<section id='scrolly'>
+
+			<figure>
+
+			</figure>
+
+			<article>
+				<div class='step' data-step='1'>
+					<p>STEP 1</p>
+				</div>
+				<div class='step' data-step='2'>
+					<p>STEP 2</p>
+				</div>
+				<div class='step' data-step='3'>
+					<p>STEP 3</p>
+				</div>
+				<div class='step' data-step='4'>
+					<p>STEP 4</p>
+				</div>
+			</article>
+
+
+		</section>
+
+		<section id='outro'></section>
+	</main>
+
+	<!-- <div class='debug'></div> -->
+	<script src='https://unpkg.com/d3@5.9.1/dist/d3.min.js'></script>
+	<script src='https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js'></script>
+	<script src='node_modules/scrollama/build/scrollama.min.js'></script>
+	<script src='js/scroller.js'></script>
 </body>
+
 </html>
+
+
