@@ -1,12 +1,12 @@
-/* body {
-    background-color: #c5f2f7;
+body {
     font-family: "Lobster";
-} */
+    margin: 0px;
+}
 
 #scrolly {
     position: relative;
     background-color: #f3f3f3;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 article {
     position: relative;
@@ -26,19 +26,7 @@ figure {
     background-color: #c5f2f7;
     z-index: 0;
 }
-figure p {
-    text-align: center;
-    padding: 1rem;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    -moz-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    font-size: 8rem;
-    font-weight: 900;
-    color: #fff;
-}
+
 
 .step {
     margin: 0 auto 2rem auto;

@@ -19,27 +19,28 @@ Promise.all([us, route]).then(function(values) {
     let width = window.innerWidth,
         height = window.innerHeight;
     // using d3 for convenience
-    var main = d3.select('main')
-    var scrolly = main.select('#scrolly');
-    var figure = scrolly.select('figure');
+    let main = d3.select('main')
+    let scrolly = main.select('#scrolly');
+    let figure = scrolly.select('figure');
+    let article = scrolly.select('article');
+    let step = article.selectAll('.step');
 
-    var plot = figure.append('svg')
-    .attr("height", "100%")
-    .attr("width", "100%")
-    .attr("viewBox", "0 0 " + width + " " + height)
-    .attr("preserveAspectRatio", "xMidYMid meet")
-    .append("g");
-
-
-    var article = scrolly.select('article');
-    var step = article.selectAll('.step');
-
+    // d3 element to operate on
+    let plot = figure.append('svg')
+        .attr("height", "100%")
+        .attr("width", "100%")
+        .attr("viewBox", "0 0 " + width + " " + height)
+        .attr("preserveAspectRatio", "xMidYMid meet")
+        .append("g");
+    
+    // define projection
     let projection = d3.geoAlbers()
                     .scale([window.innerWidth])
                     .rotate([102, 0]) // longitude center
                     .center([0, 48]) // latitude center
                     .translate([width/2, height/2]);
 
+    // path drawn with projection
     let path = d3.geoPath()
                 .projection(projection);
 
@@ -65,22 +66,28 @@ Promise.all([us, route]).then(function(values) {
         .style('stroke-width', 4);
     }
 
-    var updateFunctions = d3.range(d3.selectAll('#sections > div').size())
-    .map(function(){ return function(){} });
+    // create d3 range object to store d3 operations
+    let updateFunctions = d3.range(
+        d3.selectAll('#sections > div')
+            .size()
+            )
+        .map(function(){ 
+            return function(){} 
+        });
 
     updateFunctions[0] = firstAction;
     updateFunctions[1] = secondAction;
     // updateFunctions[2] = thirdAction;
 
     // initialize the scrollama
-    var scroller = scrollama();
+    let scroller = scrollama();
     // generic window resize listener event
     function handleResize() {
         // 1. update height of step elements
-        var stepH = Math.floor(window.innerHeight * 0.75);
+        let stepH = Math.floor(window.innerHeight * 0.75);
         step.style('height', stepH + 'px');
-        var figureHeight = window.innerHeight / 2
-        var figureMarginTop = (window.innerHeight - figureHeight) / 2
+        let figureHeight = window.innerHeight 
+        let figureMarginTop = (window.innerHeight - figureHeight) / 2
         figure
             .style('height', figureHeight + 'px')
             .style('top', figureMarginTop + 'px');
