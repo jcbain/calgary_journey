@@ -3,15 +3,20 @@ body {
     margin: 0px;
 }
 
+#intro {
+    margin: 4em;
+}
+
 #scrolly {
     position: relative;
     background-color: #f3f3f3;
     /* padding: 1rem; */
 }
+
 article {
     position: relative;
     padding: 0;
-    max-width: 20rem;
+    max-width: 40rem;
     margin: 0 auto;
 }
 figure {
