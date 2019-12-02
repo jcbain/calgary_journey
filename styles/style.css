@@ -1,7 +1,7 @@
-body {
+/* body {
     background-color: #c5f2f7;
     font-family: "Lobster";
-}
+} */
 
 #scrolly {
     position: relative;
@@ -14,7 +14,7 @@ article {
     max-width: 20rem;
     margin: 0 auto;
 }
-figure svg g{
+figure {
     position: -webkit-sticky;
     position: sticky;
     left: 0;
@@ -23,13 +23,13 @@ figure svg g{
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    background-color: #8a8a8a;
+    background-color: #c5f2f7;
     z-index: 0;
 }
 figure p {
     text-align: center;
     padding: 1rem;
-    position: absolute;
+    position: absolute; 
     top: 50%;
     left: 50%;
     -moz-transform: translate(-50%, -50%);
@@ -39,6 +39,7 @@ figure p {
     font-weight: 900;
     color: #fff;
 }
+
 .step {
     margin: 0 auto 2rem auto;
     color: #fff;

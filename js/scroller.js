@@ -1,4 +1,5 @@
-let us = d3.json("data/selected_states_provinces2.geojson");
+// data prep
+let us = d3.json("data/selected_states_provinces.geojson");
 let route = d3.json("data/to_calgary.geojson");
 let coords = [
     [-114.0719, 51.0447],
@@ -7,8 +8,9 @@ let coords = [
 let labels = [
     {text: "calgary, ab", x: 45, y: -5, align: "middle"},
     {text: "columbia, mo", x: 50, y: 20, align: "end"},
-  ]
+]
 
+// colors
 let colorSalmon = "#e3917c";
 let colorBlue = "#c5f2f7";
 let colorYellow = "#f3d86f";
@@ -19,13 +21,15 @@ Promise.all([us, route]).then(function(values) {
     // using d3 for convenience
     var main = d3.select('main')
     var scrolly = main.select('#scrolly');
-    var figure = scrolly.select('figure')
-        .append('svg')
-        .attr("height", height)
-        .attr("width", width)
-        .attr("viewBox", "0 0 " + width + " " + height)
-        .attr("preserveAspectRatio", "xMidYMid meet")
-        .append("g");
+    var figure = scrolly.select('figure');
+
+    var plot = figure.append('svg')
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("viewBox", "0 0 " + width + " " + height)
+    .attr("preserveAspectRatio", "xMidYMid meet")
+    .append("g");
+
 
     var article = scrolly.select('article');
     var step = article.selectAll('.step');
@@ -40,7 +44,7 @@ Promise.all([us, route]).then(function(values) {
                 .projection(projection);
 
     function firstAction() {
-        figure.selectAll(".base")
+        plot.selectAll(".base")
         .data(values[0].features)
         .enter()
         .append("path")
@@ -50,7 +54,7 @@ Promise.all([us, route]).then(function(values) {
     }
 
     function secondAction() {
-        figure.selectAll(".routes")
+        plot.selectAll(".routes")
         .data(values[1].features)
         .enter()
         .append("path")
