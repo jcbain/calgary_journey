@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Scrollama, Step } from 'react-scrollama';
 
 import Map from './Map';
+import trip from '../data/trip';
 
 import './styles/scroller.css'
 
@@ -10,16 +11,23 @@ class Scroller extends Component {
         super(props);
 
         this.state = {
-            data: -1,
+            data: trip[0],
             steps: [0 ,1, 2, 3],
             progress: 0,
         }
     }
 
-    onStepEnter = ({ element, data}) => {
-        if(data !== this.state.data) {
-            this.setState({ data });
+    // onStepEnter = ({ element, data}, state) => {
+    //     if(data !== this.state.data ) {
+    //         this.setState({ data });
+    //     }
+    // }
+
+    onStepEnter = (d) => {
+        if(d.leg !== this.state.data.leg){
+            this.setState({data: d.data});
         }
+
     }
 
     onStepExit = ({ element }) => {}
@@ -29,7 +37,7 @@ class Scroller extends Component {
     render(){
         return(
             <div className="main-scroller-container">
-                <Map step={this.state.data}/>
+                <Map step={this.state.data.leg} zoom={this.state.data.zoom} moveY={this.state.data.moveY} moveX={this.state.data.moveX}/>
 
                 <div className="scroller">
                     <Scrollama
@@ -40,7 +48,15 @@ class Scroller extends Component {
                     offset={0.35}
                     debug
                     >
-                    <Step data={0}>
+
+                    {trip.map(value => (
+                        <Step data={value} key={value.part}>
+                            <div className="scroller-step">
+                                <p>{value.text}</p>
+                            </div>
+                        </Step>
+                    ))}
+                    {/* <Step data={0}>
                         <div className="scroller-step">
                             <p>At 10,000 generations out, you can still see that individual phenotypes between the two populations don't look too dissimilar from one another. These individuals <span className="try-this">here</span> are the most divergent indiduals between populations. From what we can tell, there is very little difference.</p>
                         </div>
@@ -62,7 +78,7 @@ class Scroller extends Component {
                         <div className="scroller-step">
                         <p>And at 50,000th generation</p>
                         </div>
-                    </Step>
+                    </Step> */}
                     </Scrollama>
                 </div>
           </div>
@@ -71,5 +87,9 @@ class Scroller extends Component {
 
     }
 }
+
+
+
+
 
 export default Scroller;

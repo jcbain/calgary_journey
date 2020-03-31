@@ -17,7 +17,7 @@
 }
 
 .scroller-step {
-    /* min-height: 69vh; */
+    min-height: 69vh;
     margin-bottom: 80vh;
     padding: 2vw;
     border: 3px solid var(--col-yellow-lemon);

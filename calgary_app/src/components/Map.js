@@ -25,27 +25,41 @@ class Map extends Component {
             [-114.0719, 51.0447],
             [-92.3341, 38.9517]
         ];
+        this.dims = {width: 1000, height: 500}
+        this.projection = geoAlbers().scale([this.dims.width]).rotate([92, 0]).center([0, 38]).translate([this.dims.width/2, this.dims.height/2]);
+        this.path = geoPath().projection(this.projection)
         this.state = {
-            dims: {width: 1000, height: 500},
-            step: 0
+            step: 0,
         }
+
     }
+
+    
 
     mapRef = React.createRef();
     componentDidMount(){
 
 
-        let projection = geoAlbers()
-            // .scale([this.state.dims.width])
-            .scale([this.state.dims.width] * 1)
-            // .rotate([102, 0]) // longitude center
-            .rotate([92, 0 ])
-            // .center([0, 48]) // latitude center
-            .center([0, 38])
-            .translate([this.state.dims.width/2, this.state.dims.height/2]);
+        // let projection = geoAlbers()
+        //     // .scale([this.state.dims.width])
+        //     .scale([this.dims.width] * 1)
+        //     // .rotate([102, 0]) // longitude center
+        //     .rotate([92, 0 ])
+        //     // .center([0, 48]) // latitude center
+        //     .center([0, 38])
+        //     .translate([this.dims.width/2, this.dims.height/2]);
 
-        const path = geoPath()
-            .projection(projection);
+        // let projection = this.projection
+        //     // .scale([this.state.dims.width])
+        //     .scale([this.state.dims.width] * 1)
+        //     // .rotate([102, 0]) // longitude center
+        //     .rotate([92, 0 ])
+        //     // .center([0, 48]) // latitude center
+        //     .center([0, 38])
+        //     .translate([this.state.dims.width/2, this.state.dims.height/2]);
+
+        let path = geoPath()
+            .projection(this.projection);
 
 
         select(this.mapRef.current)
@@ -100,18 +114,29 @@ class Map extends Component {
             .enter()
             .append("circle")
             .attr("class", "city")
-            .attr("cx", function(d) { return projection(d)[0]; })
-            .attr("cy", function(d) { return projection(d)[1]; })
-            .attr("r", 5)
+            .attr("cx", d => { return this.projection(d)[0]; })
+            .attr("cy", d => { return this.projection(d)[1]; })
+            .attr("r", 2)
 
       
     }
 
     componentDidUpdate(){
-        let totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
+
+        select('.map-svg')
+            .transition()
+            .duration(3000)
+            .attr('transform', `translate(${this.props.moveX} ${this.props.moveY}) scale(${this.props.zoom})`)
+        
+        let totalLength = 0;
+        if ( select(`#route-part-${this.props.step}`).node() !== null){
+            totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
+        }
+
+        // let totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
 
         select(`#route-part-${this.props.step}`)
-            .attr("stroke-width", 5)
+            .attr("stroke-width", 2)
             .attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
             .transition(easeLinear).duration(3000)
@@ -127,7 +152,7 @@ class Map extends Component {
         return(
             <div className="map-container">
             <svg className="map-svg"
-                 viewBox={[0, 0, this.state.dims.width, this.state.dims.height]}
+                 viewBox={[0, 0, this.dims.width, this.dims.height]}
                  preserveAspectRatio="xMidYMid meet">
                 <g ref={this.mapRef}></g>
             </svg>
