@@ -25,7 +25,7 @@ class Map extends Component {
         ];
         this.state = {
             dims: {width: 1000, height: 500},
-            territories: [],
+            step: 0
         }
     }
 
@@ -80,17 +80,9 @@ class Map extends Component {
             .attr('stroke-width', 0)
             // .style('stroke-width', 5);
 
-        let totalLength = select("#route-part-0").node().getTotalLength()
+        
 
-        select('#route-part-0')
-            .attr("stroke-width", 5)
-            .attr("stroke-dasharray", totalLength + " " + totalLength)
-            .attr("stroke-dashoffset", totalLength)
-            .transition(easeLinear).duration(3000)
-            .attr("stroke-dashoffset", 0);
 
-            
-        console.log(selectAll('.routes')['_groups'][0][1].getTotalLength())
 
 
         select(this.mapRef.current)
@@ -106,16 +98,37 @@ class Map extends Component {
       
     }
 
+    componentDidUpdate(){
+        let totalLength = select(`#route-part-${this.state.step - 1}`).node().getTotalLength()
+
+        select(`#route-part-${this.state.step - 1}`)
+            .attr("stroke-width", 5)
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition(easeLinear).duration(3000)
+            .attr("stroke-dashoffset", 0);
+
+            
+        console.log(selectAll('.routes')['_groups'][0][1].getTotalLength())
+    }
+
 
     render(){
 
 
         return(
+            <div>
             <svg className="map-svg"
                  viewBox={[0, 0, this.state.dims.width, this.state.dims.height]}
                  preserveAspectRatio="xMidYMid meet">
                 <g ref={this.mapRef}></g>
             </svg>
+            <button onClick={() => {
+                this.setState({step: this.state.step + 1} )
+                console.log(this.state)
+            }
+                }></button>
+            </div>
         )
     }
 }
