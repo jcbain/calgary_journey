@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
+
+.map-container {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100vw;
+    height: 100vh;
+    top: 0vh;
+}
+
+.scroller {
+    padding: 0;
+    max-width: 35vw;
+    margin-left: 60vw;
+    margin-right: 5vw;
+    position: relative;
+}
+
+.scroller-step {
+    /* min-height: 69vh; */
+    margin-bottom: 80vh;
+    padding: 2vw;
+    border: 3px solid var(--col-yellow-lemon);
+    border-radius: 3px;
+    background-color: rgba(191, 216, 210, 0.7);
+    color: #fffff7;
+    font-family: 'Sen', sans-serif;
+}

@@ -5,9 +5,10 @@
     --col-yellow-lemon: #dcb239;
   }
 
+
 .map-svg {
     width: 100vw;
-    height: 80vh;
+    height: 100vh;
 }
 
 .base {
@@ -22,6 +23,13 @@
 }
 
 .provinces {
+    fill: var(--col-red-warm);
+    opacity: 70%;
+    stroke-width: 1px;
+    stroke: var(--col-red-warm)
+}
+
+.mexico {
     fill: var(--col-red-warm);
     opacity: 70%;
     stroke-width: 1px;

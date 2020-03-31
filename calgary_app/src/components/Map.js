@@ -9,6 +9,7 @@ import './styles/map.css';
 
 import states from '../data/us-states';
 import provinces from '../data/canada';
+import mexico from '../data/mexico';
 import territories from '../data/selected_states_provinces';
 import routes from '../data/to_calgary';
 
@@ -18,6 +19,7 @@ class Map extends Component {
         this.territories = territories.features;
         this.route = routes.features;
         this.states = states.features;
+        this.mexico = mexico.features;
         this.provinces = provinces.features;
         this.coords = [
             [-114.0719, 51.0447],
@@ -33,10 +35,13 @@ class Map extends Component {
     componentDidMount(){
 
 
-        const projection = geoAlbers()
-            .scale([this.state.dims.width])
-            .rotate([102, 0]) // longitude center
-            .center([0, 48]) // latitude center
+        let projection = geoAlbers()
+            // .scale([this.state.dims.width])
+            .scale([this.state.dims.width] * 1)
+            // .rotate([102, 0]) // longitude center
+            .rotate([92, 0 ])
+            // .center([0, 48]) // latitude center
+            .center([0, 38])
             .translate([this.state.dims.width/2, this.state.dims.height/2]);
 
         const path = geoPath()
@@ -57,6 +62,14 @@ class Map extends Component {
             .enter()
             .append("path")
             .attr("class", "provinces")
+            .attr("d", path);
+
+        select(this.mapRef.current)
+            .selectAll(".mexico")
+            .data(this.mexico)
+            .enter()
+            .append("path")
+            .attr("class", "mexico")
             .attr("d", path);
 
 
@@ -80,10 +93,6 @@ class Map extends Component {
             .attr('stroke-width', 0)
             // .style('stroke-width', 5);
 
-        
-
-
-
 
         select(this.mapRef.current)
             .selectAll(".city")
@@ -99,9 +108,9 @@ class Map extends Component {
     }
 
     componentDidUpdate(){
-        let totalLength = select(`#route-part-${this.state.step - 1}`).node().getTotalLength()
+        let totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
 
-        select(`#route-part-${this.state.step - 1}`)
+        select(`#route-part-${this.props.step}`)
             .attr("stroke-width", 5)
             .attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
@@ -109,7 +118,6 @@ class Map extends Component {
             .attr("stroke-dashoffset", 0);
 
             
-        console.log(selectAll('.routes')['_groups'][0][1].getTotalLength())
     }
 
 
@@ -117,7 +125,7 @@ class Map extends Component {
 
 
         return(
-            <div>
+            <div className="map-container">
             <svg className="map-svg"
                  viewBox={[0, 0, this.state.dims.width, this.state.dims.height]}
                  preserveAspectRatio="xMidYMid meet">
