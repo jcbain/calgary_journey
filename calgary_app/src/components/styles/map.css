@@ -1,16 +1,37 @@
+:root {
+    --col-blue-powder: #bfd8d2;
+    --col-pink-peach: #fedcd2;
+    --col-red-warm: #df744a;
+    --col-yellow-lemon: #dcb239;
+  }
+
 .map-svg {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 .base {
-    fill: #f3d86f;
+    fill: var(--col-red-warm);
+}
+
+.states {
+    fill: var(--col-red-warm);
+    opacity: 70%;
+    stroke-width: 1px;
+    stroke: var(--col-red-warm)
+}
+
+.provinces {
+    fill: var(--col-red-warm);
+    opacity: 70%;
+    stroke-width: 1px;
+    stroke: var(--col-red-warm)
 }
 
 .routes {
-    stroke: #e3917c
+    stroke: var(--col-yellow-lemon)
 }
 
 .city {
-    fill: #e3917c;
+    fill: var(--col-yellow-lemon)
 }
