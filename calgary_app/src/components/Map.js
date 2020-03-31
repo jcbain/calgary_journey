@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { select, selectAll } from 'd3-selection';
 import { geoAlbers, geoPath  } from 'd3-geo';
+import { easeLinear } from 'd3-ease';
+import 'd3-transition';
+import 'd3-ease';
 
 import './styles/map.css';
 
@@ -71,9 +74,24 @@ class Map extends Component {
             .enter()
             .append("path")
             .attr("class", "routes")
+            .attr("id", (d, i) => `route-part-${i}`)
             .attr("d", path)
             .style('fill', 'none')
-            .style('stroke-width', 5);
+            .attr('stroke-width', 0)
+            // .style('stroke-width', 5);
+
+        let totalLength = select("#route-part-0").node().getTotalLength()
+
+        select('#route-part-0')
+            .attr("stroke-width", 5)
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition(easeLinear).duration(3000)
+            .attr("stroke-dashoffset", 0);
+
+            
+        console.log(selectAll('.routes')['_groups'][0][1].getTotalLength())
+
 
         select(this.mapRef.current)
             .selectAll(".city")
