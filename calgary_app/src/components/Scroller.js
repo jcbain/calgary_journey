@@ -38,6 +38,7 @@ class Scroller extends Component {
         return(
             <div className="main-scroller-container">
                 <Map step={this.state.data.leg} zoom={this.state.data.zoom} moveY={this.state.data.moveY} moveX={this.state.data.moveX}/>
+                <h1>{this.state.data.city}</h1>
 
                 <div className="scroller">
                     <Scrollama

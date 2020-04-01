@@ -121,6 +121,21 @@ class Map extends Component {
       
     }
 
+    SampleFunc(){
+        let totalLength = 0;
+        if ( select(`#route-part-0`).node() !== null){
+            totalLength = select(`#route-part-0`).node().getTotalLength()
+        }
+
+        select('#route-part-0')
+        .attr("stroke-width", 2)
+        .attr("stroke-dasharray", totalLength + " " + totalLength)
+        // .attr("stroke-dasharray", totalLength + " " + totalLength)
+        .attr("stroke-dashoffset", 0)
+        .transition(easeLinear).duration(3000)
+        .attr("stroke-dashoffset", totalLength);
+    }
+
     componentDidUpdate(){
 
         select('.map-svg')
@@ -138,6 +153,7 @@ class Map extends Component {
         select(`#route-part-${this.props.step}`)
             .attr("stroke-width", 2)
             .attr("stroke-dasharray", totalLength + " " + totalLength)
+            // .attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
             .transition(easeLinear).duration(3000)
             .attr("stroke-dashoffset", 0);
@@ -156,11 +172,8 @@ class Map extends Component {
                  preserveAspectRatio="xMidYMid meet">
                 <g ref={this.mapRef}></g>
             </svg>
-            <button onClick={() => {
-                this.setState({step: this.state.step + 1} )
-                console.log(this.state)
-            }
-                }></button>
+            <button onClick={this.SampleFunc}>ClickME</button>
+
             </div>
         )
     }
