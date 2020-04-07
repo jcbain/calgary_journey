@@ -53,8 +53,10 @@ class Scroller extends Component {
                      moveX={this.state.data.moveX}
                      funcs={this.state.data.funcs}
                      direction={this.state.direction}/>
-                <h1>{this.state.data.city}</h1>
-
+                <div className='text-container'>
+                    <svg className='text-svg' viewBox={[0,0,1000,100]}></svg>
+                    <h1>{this.state.data.city}</h1>
+                </div>
                 <div className="scroller">
                     <Scrollama
                     onStepEnter={this.onStepEnter}
@@ -72,29 +74,6 @@ class Scroller extends Component {
                             </div>
                         </Step>
                     ))}
-                    {/* <Step data={0}>
-                        <div className="scroller-step">
-                            <p>At 10,000 generations out, you can still see that individual phenotypes between the two populations don't look too dissimilar from one another. These individuals <span className="try-this">here</span> are the most divergent indiduals between populations. From what we can tell, there is very little difference.</p>
-                        </div>
-                    </Step>
-
-                    <Step data={0}>
-                        <div className="scroller-step">
-                            <p>At 10,000 generations out, you can still see that individual phenotypes between the two populations don't look too dissimilar from one another. These individuals <span className="try-this">here</span> are the most divergent indiduals between populations. From what we can tell, there is very little difference.</p>
-                        </div>
-                    </Step>
-
-                    <Step data={1}>
-                        <div className="scroller-step">
-                        <p>And at 20,000th generation</p>
-                        </div>
-                    </Step>
-
-                    <Step data={2}>
-                        <div className="scroller-step">
-                        <p>And at 50,000th generation</p>
-                        </div>
-                    </Step> */}
                     </Scrollama>
                 </div>
           </div>

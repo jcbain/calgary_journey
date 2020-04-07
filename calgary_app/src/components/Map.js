@@ -5,6 +5,9 @@ import { easeLinear } from 'd3-ease';
 import 'd3-transition';
 import 'd3-ease';
 
+import {geoDistance} from 'd3-geo';
+import { calculatePathDistanceMiles, runDistance} from '../helpers/distances';
+
 import './styles/map.css';
 
 import states from '../data/us-states';
@@ -40,11 +43,18 @@ class Map extends Component {
 
     mapRef = React.createRef();
     componentDidMount(){
+        // console.log(this.route)
+        // for(let i = 0; i < this.route.length; i++){
+        //     console.log(calculatePathDistanceMiles(this.route[i].geometry.coordinates[0]))
+        // }
+        
 
         let path = geoPath()
             .projection(this.projection);
 
         let map = select(this.mapRef.current);
+
+        
 
 
         map
@@ -89,52 +99,18 @@ class Map extends Component {
             .attr("id", (d, i) => `route-part-${i}`)
             .attr("d", path)
             .style('fill', 'none')
-            .attr('stroke-width', 0)
-            // .style('stroke-width', 5);
+            .attr('stroke-width', 0);
 
 
-        // select(this.mapRef.current)
-        //     .selectAll(".city")
-        //     .data(this.coords)
-        //     .enter()
-        //     .append("circle")
-        //     .attr("class", "city")
-        //     .attr("cx", d => { return this.projection(d)[0]; })
-        //     .attr("cy", d => { return this.projection(d)[1]; })
-        //     .attr("r", 2)
 
-      
     }
 
 
     componentDidUpdate(){
-        // console.log(funcs.samp2.call(this))
 
         this.props.funcs.map(d => {
             return d.call(this);
-        })
-
-        // select('.map-svg')
-        //     .transition()
-        //     .duration(3000)
-        //     .attr('transform', `translate(${this.props.moveX} ${this.props.moveY}) scale(${this.props.zoom})`)
-        
-        // let totalLength = 0;
-        // if ( select(`#route-part-${this.props.step}`).node() !== null){
-        //     totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
-        // }
-
-        // // let totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
-
-        // select(`#route-part-${this.props.step}`)
-        //     .attr("stroke-width", 2)
-        //     .attr("stroke-dasharray", totalLength + " " + totalLength)
-        //     // .attr("stroke-dasharray", totalLength + " " + totalLength)
-        //     .attr("stroke-dashoffset", totalLength)
-        //     .transition(easeLinear).duration(3000)
-        //     .attr("stroke-dashoffset", 0);
-
-            
+        })            
     }
 
 

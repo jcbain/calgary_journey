@@ -1,6 +1,8 @@
 import React from 'react';
 import { select } from 'd3-selection';
 import {easeSin} from 'd3-ease'
+import { interpolate } from 'd3-interpolate';
+
 
 export const funcs = {
     blank: function() {return;},
@@ -19,6 +21,32 @@ export const funcs = {
             .attr("r", 2)
         return city
     },
+    addInitialDistance: function(){
+        return(
+            select('.text-svg')
+            .append('text')
+                .text("distance traveled 0")
+                .transition()
+                .duration(5000)
+                .attr('x', 10)
+                .attr('y', 15)
+                .attr('class', 'distance-text')
+        )
+
+    },
+    moveDistance: function(){
+        return(
+            select('.text-svg')
+                .selectAll('.distance-text')
+                .transition()
+                .duration(3000)
+                .tween('.distance-text', function(d) {
+                    let i = interpolate(0, 130);
+                    return function(t){ 
+                        select(this).text(`distance traveled ${Math.round(i(t))}`)}
+                })
+        )
+    },
     zoomMap: function() {
         return(        select('.map-svg')
         .transition()
@@ -32,6 +60,7 @@ export const funcs = {
             totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
         }
         console.log(this.props.direction)
+        console.log(select(`#route-part-${this.props.step}`).node())
 
         if(this.props.direction === "down"){
             
@@ -66,7 +95,7 @@ export const trip = [
         zoom: 5,
         moveY: 0,
         moveX: 0,
-        funcs: [funcs.zoomMap, funcs.addColumbia],
+        funcs: [funcs.zoomMap, funcs.addColumbia, funcs.addInitialDistance],
     }, 
     {
         part: 1,
@@ -77,7 +106,7 @@ export const trip = [
         zoom: 5,
         moveY: 0,
         moveX: 0,
-        funcs: [funcs.zoomMap, funcs.progressRoute],
+        funcs: [funcs.zoomMap, funcs.progressRoute, funcs.moveDistance],
     },
     {
         part: 2,
@@ -114,3 +143,6 @@ export const trip = [
     }
 ]
 
+const distances = [135.85255598723776, 26.09799728478469
+, 464.5745649933896, 145.56512854380514
+, 33.23544231308974, 7.8000198100148115, 4.152354692104787, 11.543164934882912, 70.13160657387805, 129.52744166820193, 265.4089851686229, 136.70390475489785, 202.19826262316366, 196.7323093705185]

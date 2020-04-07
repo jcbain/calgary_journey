@@ -28,19 +28,35 @@
     font-family: 'Sen', sans-serif;
 }
 
-h1 {
+.text-container {
     position: fixed;
-    top: 85vh;
+    top: 60vh;
     left: 5vw;
+    height: 40vh;
+    width: 40vw;
+}
+.text-svg {
+    height: 20vh;
+}
+
+h1 {
+    /* position: fixed;
+    top: 85vh;
+    left: 5vw; */
     font-family: 'Permanent Marker', cursive;
     color: var(--col-yellow-lemon);
     text-shadow: 2px 2px #c49000;
 }
 
-button {
+.distance-text {
     position: fixed;
     top: 50vh;
     left: 10vw;
     width: 10vw;
 
+}
+
+text {
+    font-family: 'Permanent Marker', cursive;
+    fill: var(--col-yellow-lemon);
 }
