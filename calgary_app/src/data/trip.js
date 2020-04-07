@@ -1,4 +1,17 @@
-const trip = [
+import { select } from 'd3-selection';
+
+export const funcs = {
+    zoomMap: function() {
+        return(        select('.map-svg')
+        .transition()
+        .duration(3000)
+        .attr('transform', `translate(${this.props.moveX} ${this.props.moveY}) scale(${this.props.zoom})`))
+
+    }
+
+}
+
+export const trip = [
     {
         part: 0,
         leg: -1,
@@ -8,6 +21,7 @@ const trip = [
         zoom: 5,
         moveY: 0,
         moveX: 0,
+        funcs: function() {return;}
     }, 
     {
         part: 1,
@@ -18,6 +32,7 @@ const trip = [
         zoom: 5,
         moveY: 0,
         moveX: 0,
+        funcs: funcs.zoomMap,
     },
     {
         part: 2,
@@ -51,4 +66,3 @@ const trip = [
     }
 ]
 
-export default trip;

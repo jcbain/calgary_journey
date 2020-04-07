@@ -13,6 +13,8 @@ import mexico from '../data/mexico';
 import territories from '../data/selected_states_provinces';
 import routes from '../data/to_calgary';
 
+
+import {funcs} from '../data/trip';
 class Map extends Component {
     constructor(props){
         super(props)
@@ -39,30 +41,13 @@ class Map extends Component {
     mapRef = React.createRef();
     componentDidMount(){
 
-
-        // let projection = geoAlbers()
-        //     // .scale([this.state.dims.width])
-        //     .scale([this.dims.width] * 1)
-        //     // .rotate([102, 0]) // longitude center
-        //     .rotate([92, 0 ])
-        //     // .center([0, 48]) // latitude center
-        //     .center([0, 38])
-        //     .translate([this.dims.width/2, this.dims.height/2]);
-
-        // let projection = this.projection
-        //     // .scale([this.state.dims.width])
-        //     .scale([this.state.dims.width] * 1)
-        //     // .rotate([102, 0]) // longitude center
-        //     .rotate([92, 0 ])
-        //     // .center([0, 48]) // latitude center
-        //     .center([0, 38])
-        //     .translate([this.state.dims.width/2, this.state.dims.height/2]);
-
         let path = geoPath()
             .projection(this.projection);
 
+        let map = select(this.mapRef.current);
 
-        select(this.mapRef.current)
+
+        map
             .selectAll(".states")
             .data(this.states)
             .enter()
@@ -70,7 +55,7 @@ class Map extends Component {
             .attr("class", "states")
             .attr("d", path);
 
-        select(this.mapRef.current)
+        map
             .selectAll(".provinces")
             .data(this.provinces)
             .enter()
@@ -78,7 +63,7 @@ class Map extends Component {
             .attr("class", "provinces")
             .attr("d", path);
 
-        select(this.mapRef.current)
+        map
             .selectAll(".mexico")
             .data(this.mexico)
             .enter()
@@ -87,7 +72,7 @@ class Map extends Component {
             .attr("d", path);
 
 
-        select(this.mapRef.current)
+        map
             .selectAll(".base")
             .data(this.territories)
             .enter()
@@ -95,7 +80,7 @@ class Map extends Component {
             .attr("class", "base")
             .attr("d", path);
 
-        select(this.mapRef.current)
+        map
             .selectAll(".routes")
             .data(this.route)
             .enter()
@@ -137,11 +122,14 @@ class Map extends Component {
     }
 
     componentDidUpdate(){
+        // console.log(funcs.samp2.call(this))
 
-        select('.map-svg')
-            .transition()
-            .duration(3000)
-            .attr('transform', `translate(${this.props.moveX} ${this.props.moveY}) scale(${this.props.zoom})`)
+        this.props.funcs.call(this);
+
+        // select('.map-svg')
+        //     .transition()
+        //     .duration(3000)
+        //     .attr('transform', `translate(${this.props.moveX} ${this.props.moveY}) scale(${this.props.zoom})`)
         
         let totalLength = 0;
         if ( select(`#route-part-${this.props.step}`).node() !== null){

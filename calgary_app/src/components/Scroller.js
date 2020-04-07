@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Scrollama, Step } from 'react-scrollama';
 
 import Map from './Map';
-import trip from '../data/trip';
+import {trip, funcs} from '../data/trip';
 
 import './styles/scroller.css'
 
@@ -37,7 +37,11 @@ class Scroller extends Component {
     render(){
         return(
             <div className="main-scroller-container">
-                <Map step={this.state.data.leg} zoom={this.state.data.zoom} moveY={this.state.data.moveY} moveX={this.state.data.moveX}/>
+                <Map step={this.state.data.leg} 
+                     zoom={this.state.data.zoom} 
+                     moveY={this.state.data.moveY} 
+                     moveX={this.state.data.moveX}
+                     funcs={this.state.data.funcs}/>
                 <h1>{this.state.data.city}</h1>
 
                 <div className="scroller">
