@@ -93,33 +93,19 @@ class Map extends Component {
             // .style('stroke-width', 5);
 
 
-        select(this.mapRef.current)
-            .selectAll(".city")
-            .data(this.coords)
-            .enter()
-            .append("circle")
-            .attr("class", "city")
-            .attr("cx", d => { return this.projection(d)[0]; })
-            .attr("cy", d => { return this.projection(d)[1]; })
-            .attr("r", 2)
+        // select(this.mapRef.current)
+        //     .selectAll(".city")
+        //     .data(this.coords)
+        //     .enter()
+        //     .append("circle")
+        //     .attr("class", "city")
+        //     .attr("cx", d => { return this.projection(d)[0]; })
+        //     .attr("cy", d => { return this.projection(d)[1]; })
+        //     .attr("r", 2)
 
       
     }
 
-    SampleFunc(){
-        let totalLength = 0;
-        if ( select(`#route-part-0`).node() !== null){
-            totalLength = select(`#route-part-0`).node().getTotalLength()
-        }
-
-        select('#route-part-0')
-        .attr("stroke-width", 2)
-        .attr("stroke-dasharray", totalLength + " " + totalLength)
-        // .attr("stroke-dasharray", totalLength + " " + totalLength)
-        .attr("stroke-dashoffset", 0)
-        .transition(easeLinear).duration(3000)
-        .attr("stroke-dashoffset", totalLength);
-    }
 
     componentDidUpdate(){
         // console.log(funcs.samp2.call(this))
@@ -160,10 +146,8 @@ class Map extends Component {
             <svg className="map-svg"
                  viewBox={[0, 0, this.dims.width, this.dims.height]}
                  preserveAspectRatio="xMidYMid meet">
-                <g ref={this.mapRef}></g>
+                <g className="map-items" ref={this.mapRef}></g>
             </svg>
-            <button onClick={this.SampleFunc}>ClickME</button>
-
             </div>
         )
     }

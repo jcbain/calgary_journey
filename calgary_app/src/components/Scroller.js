@@ -62,13 +62,13 @@ class Scroller extends Component {
                     progress
                     onStepProgress={this.onStepProgress}
                     offset={0.35}
-                    debug
+                    // debug
                     >
 
                     {trip.map(value => (
                         <Step data={value} key={value.part}>
                             <div className="scroller-step">
-                                <p>{value.text}</p>
+                                {value.text}
                             </div>
                         </Step>
                     ))}

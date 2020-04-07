@@ -1,8 +1,24 @@
+import React from 'react';
 import { select } from 'd3-selection';
-import {easeLinear} from 'd3-ease'
+import {easeSin} from 'd3-ease'
 
 export const funcs = {
     blank: function() {return;},
+    addColumbia: function() {
+        let projection = this.projection;
+        let city = select('.map-items')
+            .selectAll(".city")
+            .data(this.coords)
+            .enter()
+            .append("circle")
+            .attr("class", "city")
+            .attr("cx", d =>  { return projection(d)[0]; })
+            .attr("cy", d => { return projection(d)[1]; })
+            .transition()
+            .duration(5000)
+            .attr("r", 2)
+        return city
+    },
     zoomMap: function() {
         return(        select('.map-svg')
         .transition()
@@ -31,7 +47,7 @@ export const funcs = {
                 .attr("stroke-width", 2)
                 .attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", start)
-            .transition(easeLinear).duration(3000)
+            .transition(easeSin).duration(3000)
             .attr("stroke-dashoffset", end)
 
 
@@ -44,13 +60,13 @@ export const trip = [
     {
         part: 0,
         leg: -1,
-        text: "It all started here. Columbia, MO, where my wife, Jennifer, and I picked up and made our way to Calgary.",
+        text: <p>Up until last year, this was our little slice of the Earth. Columbia, MO is a small"ish" college town wedged between the humble metropolises of Kansas City and St. Louis Missouri.</p>,
         city: "Columbia, MO",
         date: "July 2nd, 2019",
         zoom: 5,
         moveY: 0,
         moveX: 0,
-        funcs: [funcs.blank],
+        funcs: [funcs.zoomMap, funcs.addColumbia],
     }, 
     {
         part: 1,
@@ -66,7 +82,7 @@ export const trip = [
     {
         part: 2,
         leg: 1,
-        text: "We didn't make it very far before Jennifer decided that she got too hot and needed to shed some layers at a rest stop.",
+        text: <p>We didn't make it very far before Jennifer decided that she got too hot and needed to shed some layers at a rest stop.</p>,
         city: "Somewhere out side of Platte City, MO",
         date: "July 2nd, 2019",
         zoom: 5,
@@ -77,7 +93,7 @@ export const trip = [
     {
         part: 3,
         leg: 2,
-        text: "Then things started moving a long. We made it all the way up to South Dakota where we ran into the biggest thunderstorm of our life.",
+        text: <p>Then things started moving a long. We made it all the way up to South Dakota where we ran into the biggest thunderstorm of our life.</p>,
         city: "Somewhere in South Dakota",
         date: "July 2nd, 2019",
         zoom: 5,
@@ -88,7 +104,7 @@ export const trip = [
     {
         part: 4,
         leg: 3,
-        text: "Then things started moving a long. We made it all the way up to South Dakota where we ran into the biggest thunderstorm of our life.",
+        text: <p>Then things started moving a long. We made it all the way up to South Dakota where we ran into the biggest thunderstorm of our life.</p>,
         city: "Somewhere in South Dakota",
         date: "July 2nd, 2019",
         zoom: 5,
