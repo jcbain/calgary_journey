@@ -1,12 +1,41 @@
 import { select } from 'd3-selection';
+import {easeLinear} from 'd3-ease'
 
 export const funcs = {
+    blank: function() {return;},
     zoomMap: function() {
         return(        select('.map-svg')
         .transition()
         .duration(3000)
         .attr('transform', `translate(${this.props.moveX} ${this.props.moveY}) scale(${this.props.zoom})`))
+    },
+    progressRoute: function() {
+        let start, end;
+        let totalLength = 0;
+        if ( select(`#route-part-${this.props.step}`).node() !== null){
+            totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
+        }
+        console.log(this.props.direction)
 
+        if(this.props.direction === "down"){
+            
+            end = 0;
+            start = totalLength;
+        } else {
+            end = totalLength;
+            start = 0;
+        }
+        return(
+            
+            select(`#route-part-${this.props.step}`)
+                .attr("stroke-width", 2)
+                .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", start)
+            .transition(easeLinear).duration(3000)
+            .attr("stroke-dashoffset", end)
+
+
+        )
     }
 
 }
@@ -21,7 +50,7 @@ export const trip = [
         zoom: 5,
         moveY: 0,
         moveX: 0,
-        funcs: function() {return;}
+        funcs: [funcs.blank],
     }, 
     {
         part: 1,
@@ -32,7 +61,7 @@ export const trip = [
         zoom: 5,
         moveY: 0,
         moveX: 0,
-        funcs: funcs.zoomMap,
+        funcs: [funcs.zoomMap, funcs.progressRoute],
     },
     {
         part: 2,
@@ -43,6 +72,7 @@ export const trip = [
         zoom: 5,
         moveY: 0,
         moveX: 0,
+        funcs: [funcs.zoomMap, funcs.progressRoute],
     },
     {
         part: 3,
@@ -53,6 +83,7 @@ export const trip = [
         zoom: 5,
         moveY: 490,
         moveX: 500,
+        funcs: [funcs.zoomMap, funcs.progressRoute],
     },
     {
         part: 4,
@@ -63,6 +94,7 @@ export const trip = [
         zoom: 5,
         moveY: 490,
         moveX: 500,
+        funcs: [funcs.blank],
     }
 ]
 

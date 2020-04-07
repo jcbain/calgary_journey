@@ -124,27 +124,29 @@ class Map extends Component {
     componentDidUpdate(){
         // console.log(funcs.samp2.call(this))
 
-        this.props.funcs.call(this);
+        this.props.funcs.map(d => {
+            return d.call(this);
+        })
 
         // select('.map-svg')
         //     .transition()
         //     .duration(3000)
         //     .attr('transform', `translate(${this.props.moveX} ${this.props.moveY}) scale(${this.props.zoom})`)
         
-        let totalLength = 0;
-        if ( select(`#route-part-${this.props.step}`).node() !== null){
-            totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
-        }
+        // let totalLength = 0;
+        // if ( select(`#route-part-${this.props.step}`).node() !== null){
+        //     totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
+        // }
 
-        // let totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
+        // // let totalLength = select(`#route-part-${this.props.step}`).node().getTotalLength()
 
-        select(`#route-part-${this.props.step}`)
-            .attr("stroke-width", 2)
-            .attr("stroke-dasharray", totalLength + " " + totalLength)
-            // .attr("stroke-dasharray", totalLength + " " + totalLength)
-            .attr("stroke-dashoffset", totalLength)
-            .transition(easeLinear).duration(3000)
-            .attr("stroke-dashoffset", 0);
+        // select(`#route-part-${this.props.step}`)
+        //     .attr("stroke-width", 2)
+        //     .attr("stroke-dasharray", totalLength + " " + totalLength)
+        //     // .attr("stroke-dasharray", totalLength + " " + totalLength)
+        //     .attr("stroke-dashoffset", totalLength)
+        //     .transition(easeLinear).duration(3000)
+        //     .attr("stroke-dashoffset", 0);
 
             
     }

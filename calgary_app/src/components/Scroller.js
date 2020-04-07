@@ -14,6 +14,7 @@ class Scroller extends Component {
             data: trip[0],
             steps: [0 ,1, 2, 3],
             progress: 0,
+            direction: undefined,
         }
     }
 
@@ -23,14 +24,23 @@ class Scroller extends Component {
     //     }
     // }
 
-    onStepEnter = (d) => {
-        if(d.leg !== this.state.data.leg){
-            this.setState({data: d.data});
-        }
+    onStepEnter = ({data, direction}) => {
+        console.log(direction)
+        this.setState({data, direction})
+        // if(data.leg !== this.state.data.leg){
+        //     this.setState({data, direction})
+
+        // }
+        // if(data.leg !== this.state.data.leg){
+        //     this.setState({data: data.data});
+        // }
 
     }
 
-    onStepExit = ({ element }) => {}
+    onStepExit = ({ element, direction, data}) => {
+        console.log(direction)
+        console.log(data)
+    }
 
     onStepProgress = ({ element }) => {}
 
@@ -41,7 +51,8 @@ class Scroller extends Component {
                      zoom={this.state.data.zoom} 
                      moveY={this.state.data.moveY} 
                      moveX={this.state.data.moveX}
-                     funcs={this.state.data.funcs}/>
+                     funcs={this.state.data.funcs}
+                     direction={this.state.direction}/>
                 <h1>{this.state.data.city}</h1>
 
                 <div className="scroller">
