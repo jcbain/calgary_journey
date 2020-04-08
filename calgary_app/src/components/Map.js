@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { select, selectAll } from 'd3-selection';
+import { select } from 'd3-selection';
 import { geoAlbers, geoPath  } from 'd3-geo';
-import { easeLinear } from 'd3-ease';
 import 'd3-transition';
 import 'd3-ease';
 
-import {geoDistance} from 'd3-geo';
-import { calculatePathDistanceMiles, runDistance} from '../helpers/distances';
+// import { calculatePathDistanceMiles, runDistance} from '../helpers/distances';
 
 import './styles/map.css';
 
@@ -16,8 +14,6 @@ import mexico from '../data/mexico';
 import territories from '../data/selected_states_provinces';
 import routes from '../data/to_calgary';
 
-
-import {funcs} from '../data/trip';
 class Map extends Component {
     constructor(props){
         super(props)
@@ -34,6 +30,7 @@ class Map extends Component {
         this.projection = geoAlbers().scale([this.dims.width]).rotate([92, 0]).center([0, 38]).translate([this.dims.width/2, this.dims.height/2]);
         this.path = geoPath().projection(this.projection)
         this.state = {
+            history: Array(1).fill(0), 
             step: 0,
         }
 
@@ -43,6 +40,8 @@ class Map extends Component {
 
     mapRef = React.createRef();
     componentDidMount(){
+        console.log(this.state.history)
+        
         // console.log(this.route)
         // for(let i = 0; i < this.route.length; i++){
         //     console.log(calculatePathDistanceMiles(this.route[i].geometry.coordinates[0]))
@@ -53,9 +52,6 @@ class Map extends Component {
             .projection(this.projection);
 
         let map = select(this.mapRef.current);
-
-        
-
 
         map
             .selectAll(".states")
@@ -107,10 +103,12 @@ class Map extends Component {
 
 
     componentDidUpdate(){
-
+ 
+        console.log(this.state)
         this.props.funcs.map(d => {
             return d.call(this);
-        })            
+        }) 
+        
     }
 
 
