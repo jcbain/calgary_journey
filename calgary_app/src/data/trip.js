@@ -96,7 +96,7 @@ export const trip = [
     {
         part: 0,
         leg: -1,
-        text: <p>Up until last year, this was our little slice of the Earth. Columbia, MO is a small"ish" college town wedged between the humble metropolises of Kansas City and St. Louis Missouri.</p>,
+        text: <p>Up until last year, this was our little slice of the Earth. Columbia, Missouri is a small"ish" college town wedged between the humble metropolises of Kansas City and St. Louis. This is where we called home for nearly a decade, save for that year spent subsisting on baguettes and red wine in the south of France.<br /><br /> 2019 was momentous in many ways. To start, James was knighted by the Queen herself. By knighted we mean earned his PhD and by the Queen we mean some guy whose name was probably Reginald or Steve or something that conveyed professorial stature. This was very likely the catalyst for the next event of note in our 2019. After establishing ourselves in a city that we never thought we would call home and finding friends that others go lifetimes searching for, it was bitter-sweetly time for us to pack-up our lives, pups and all, and make our way up to the land of moose and mounties. <br /><br /> Canada was a natural next step mostly because that is where James landed a job. Yes, we now found ourselves packing up our lives about to embark on our journey up to Calgary, Alberta, home of the Western Hemisphere's largest stampede, Tegan and Sara, and the Flames, not to mention some of the most beautiful mountains on the globe just an hour to the west. <br /><br />...But this isn't the story of our adventures to be held up in our new found home, but instead this is the story of a trip that spanned 3 weeks, 20+ states, 2 provinces, 2 cars, 1 wedding, thousands of miles of driving and countless Econolodge check-ins. This is the story of our move up to the Great White North.</p>,
         city: "Columbia, MO",
         date: "July 2nd, 2019",
         zoom: 5,
@@ -108,7 +108,7 @@ export const trip = [
     {
         part: 1,
         leg: 0,
-        text: "Jennifer made her way to Kansas City",
+        text: <p>The first leg of the trip was carried solely by Jennifer, who was finishing up some business in Columbia before packing the last few items and making her way to our original home, Kansas City, Missouri. <br /><br />It was here that she picked up James and they started the first part of their journey. Our goods were shipped off on a semitruck just a few days early our goal, at this point, was to meet our good up in Calgary where we'd unload them into our new apartment before making our way back to the States for a wedding, a wedding that was in the complete otherside of the continent. This gave us the opportunity to leave the pups in Kansas City with Jennifer's parents while we moved in our stuff and we would simply pick them up on our way back.<br /><br />So away we went...</p>,
         city: "Kansas City, MO",
         date: "July 2nd, 2019",
         zoom: 5,
@@ -120,7 +120,7 @@ export const trip = [
     {
         part: 2,
         leg: 1,
-        text: <p>We didn't make it very far before Jennifer decided that she got too hot and needed to shed some layers at a rest stop.</p>,
+        text: <p>...we made it about 35 minutes before our first stop. Jennifer realized that she dressed for Canada, which was still about 21.3 hours of driving away, and that she had to shed a few layers in order to acclimate to the 90˚F Missouri summer.</p>,
         city: "Somewhere out side of Platte City, MO",
         date: "July 2nd, 2019",
         zoom: 5,
