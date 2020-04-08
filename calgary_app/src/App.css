@@ -5,5 +5,11 @@ html, body {
 
 body {
     overflow-x: hidden;
-    background-color: #bfd8d2;
+    /* background-color: #bfd8d2; */
+}
+
+.second-part {
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
 }

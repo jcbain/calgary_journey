@@ -7,23 +7,40 @@
     width: 100vw;
     height: 100vh;
     top: 0vh;
+    background-color: #bfd8d2;
 }
 
+.map-svg {
+    width: 80vw;
+
+}
+
+/* .hiding-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 40vw;
+    background: linear-gradient(to left, var(--col-blue-powder), transparent 99%);
+} */
+
+
 .scroller {
-    padding: 0;
+    /* background: linear-gradient(to left, var(--col-blue-powder), transparent 95%); */
+    /* background-color: var(--col-blue-powder); */
+    padding-right: 5vw;
     max-width: 35vw;
     margin-left: 60vw;
-    margin-right: 5vw;
+    margin-right: 0vw;
     position: relative;
 }
 
 .scroller-step {
     min-height: 69vh;
     margin-bottom: 80vh;
-    padding: 2vw;
-    border: 3px solid var(--col-yellow-lemon);
-    border-radius: 3px;
-    background-color: rgba(191, 216, 210, 0.7);
+    padding-left: 10vw;
+    /* border-radius: 3px;
+    background-color: rgba(191, 216, 210, 0.7); */
     color: #fffff7;
     font-family: 'Sen', sans-serif;
 }

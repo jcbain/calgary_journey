@@ -6,7 +6,10 @@ class App extends Component{
 
     render(){
         return(
+            <div>
             <Scroller />
+            <div className="second-part"></div>
+            </div>
         )
     }
 }

@@ -36,6 +36,7 @@ class Scroller extends Component {
     render(){
         return(
             <div className="main-scroller-container">
+                <div className="map-container">
                 <Map step={this.state.data.leg} 
                      zoom={this.state.data.zoom} 
                      moveY={this.state.data.moveY} 
@@ -44,6 +45,8 @@ class Scroller extends Component {
                      direction={this.state.direction}
                      currentDistance={this.state.data.distance}
                      distanceHistory={this.state.distance}/>
+                {/* <div className="hiding-container"></div> */}
+                </div>
                 <div className='text-container'>
                     <svg className='text-svg' viewBox={[0,0,1000,100]}></svg>
                     <h1>{this.state.data.city}</h1>

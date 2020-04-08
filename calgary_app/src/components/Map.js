@@ -27,7 +27,7 @@ class Map extends Component {
             [-92.3341, 38.9517]
         ];
         this.dims = {width: 1000, height: 500}
-        this.projection = geoAlbers().scale([this.dims.width]).rotate([92, 0]).center([0, 38]).translate([this.dims.width/2, this.dims.height/2]);
+        this.projection = geoAlbers().scale([this.dims.width]).rotate([85, 0]).center([0, 45]).translate([this.dims.width/2, this.dims.height/2]);
         this.path = geoPath().projection(this.projection)
         this.state = {
             history: Array(1).fill(0), 
@@ -116,13 +116,12 @@ class Map extends Component {
 
 
         return(
-            <div className="map-container">
             <svg className="map-svg"
                  viewBox={[0, 0, this.dims.width, this.dims.height]}
                  preserveAspectRatio="xMidYMid meet">
                 <g className="map-items" ref={this.mapRef}></g>
             </svg>
-            </div>
+
         )
     }
 }

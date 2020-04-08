@@ -87,8 +87,7 @@ export const funcs = {
 
 
         )
-    }
-
+    },
 }
 
 const distances = [135.85255598723776, 26.09799728478469, 464.5745649933896, 145.56512854380514, 33.23544231308974, 7.8000198100148115, 4.152354692104787, 11.543164934882912, 70.13160657387805, 129.52744166820193, 265.4089851686229, 136.70390475489785, 202.19826262316366, 196.7323093705185]
@@ -101,8 +100,8 @@ export const trip = [
         city: "Columbia, MO",
         date: "July 2nd, 2019",
         zoom: 5,
-        moveY: 0,
-        moveX: 0,
+        moveY: -300,
+        moveX: 600,
         distance: 0,
         funcs: [funcs.zoomMap, funcs.addColumbia, funcs.addInitialDistance],
     }, 
@@ -113,8 +112,8 @@ export const trip = [
         city: "Kansas City, MO",
         date: "July 2nd, 2019",
         zoom: 5,
-        moveY: 0,
-        moveX: 0,
+        moveY: -300,
+        moveX: 600,
         distance: distances[0],
         funcs: [funcs.zoomMap, funcs.progressRoute, funcs.moveDistance],
     },
@@ -125,8 +124,8 @@ export const trip = [
         city: "Somewhere out side of Platte City, MO",
         date: "July 2nd, 2019",
         zoom: 5,
-        moveY: 0,
-        moveX: 0,
+        moveY: -300,
+        moveX: 600,
         distance: distances[1],
         funcs: [funcs.zoomMap, funcs.progressRoute, funcs.moveDistance],
     },
@@ -137,8 +136,8 @@ export const trip = [
         city: "Somewhere in South Dakota",
         date: "July 2nd, 2019",
         zoom: 5,
-        moveY: 490,
-        moveX: 500,
+        moveY: 190,
+        moveX: 1100,
         distance: distances[2],
         funcs: [funcs.zoomMap, funcs.progressRoute, funcs.moveDistance],
     },
@@ -148,11 +147,23 @@ export const trip = [
         text: <p>Then things started moving a long. We made it all the way up to South Dakota where we ran into the biggest thunderstorm of our life.</p>,
         city: "Somewhere in South Dakota",
         date: "July 2nd, 2019",
-        zoom: 5,
-        moveY: 490,
-        moveX: 500,
+        zoom: 1,
+        moveY: 0,
+        moveX: 0,
         distance: distances[2],
-        funcs: [funcs.blank],
+        funcs: [funcs.zoomMap],
+    },
+    {
+        part: 5,
+        leg: 4,
+        text: <p>Then things started moving a long. We made it all the way up to South Dakota where we ran into the biggest thunderstorm of our life.</p>,
+        city: "Somewhere in South Dakota",
+        date: "July 2nd, 2019",
+        zoom: 1,
+        moveY: 0,
+        moveX: 0,
+        distance: distances[2],
+        funcs: [funcs.zoomMap],
     }
 ]
 
