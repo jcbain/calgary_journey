@@ -27,7 +27,7 @@ class Map extends Component {
             [-92.3341, 38.9517]
         ];
         this.dims = {width: 1000, height: 500}
-        this.projection = geoAlbers().scale([this.dims.width]).rotate([85, 0]).center([0, 45]).translate([this.dims.width/2, this.dims.height/2]);
+        this.projection = geoAlbers().scale([this.dims.width]).rotate([92, 0]).center([0, 38]).translate([this.dims.width/2, this.dims.height/2]);
         this.path = geoPath().projection(this.projection)
         this.state = {
             history: Array(1).fill(0), 
@@ -41,7 +41,9 @@ class Map extends Component {
     mapRef = React.createRef();
     componentDidMount(){
         console.log(this.state.history)
-        
+        console.log(this.projection([-92.3341, 38.9517]))
+        console.log(this.projection([-114.0719, 51.0447]))
+        console.log(this.projection.center())
         // console.log(this.route)
         // for(let i = 0; i < this.route.length; i++){
         //     console.log(calculatePathDistanceMiles(this.route[i].geometry.coordinates[0]))

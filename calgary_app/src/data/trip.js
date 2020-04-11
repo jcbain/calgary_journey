@@ -56,7 +56,9 @@ export const funcs = {
         )
     },
     zoomMap: function() {
-        return(        select('.map-svg')
+  
+        // return(        select('.map-svg')
+        return(select(this.mapRef.current)
         .transition()
         .duration(3000)
         .attr('transform', `translate(${this.props.moveX} ${this.props.moveY}) scale(${this.props.zoom})`))
@@ -100,8 +102,8 @@ export const trip = [
         city: "Columbia, MO",
         date: "July 2nd, 2019",
         zoom: 5,
-        moveY: -300,
-        moveX: 600,
+        moveY: -1000,
+        moveX: -2000,
         distance: 0,
         funcs: [funcs.zoomMap, funcs.addColumbia, funcs.addInitialDistance],
     }, 
@@ -112,8 +114,8 @@ export const trip = [
         city: "Kansas City, MO",
         date: "July 2nd, 2019",
         zoom: 5,
-        moveY: -300,
-        moveX: 600,
+        moveY: -1000,
+        moveX: -1900,
         distance: distances[0],
         funcs: [funcs.zoomMap, funcs.progressRoute, funcs.moveDistance],
     },
@@ -124,8 +126,8 @@ export const trip = [
         city: "Somewhere out side of Platte City, MO",
         date: "July 2nd, 2019",
         zoom: 5,
-        moveY: -300,
-        moveX: 600,
+        moveY: -900,
+        moveX: -1890,
         distance: distances[1],
         funcs: [funcs.zoomMap, funcs.progressRoute, funcs.moveDistance],
     },
@@ -136,8 +138,8 @@ export const trip = [
         city: "Somewhere in South Dakota",
         date: "July 2nd, 2019",
         zoom: 5,
-        moveY: 190,
-        moveX: 1100,
+        moveY: -500,
+        moveX: -1500,
         distance: distances[2],
         funcs: [funcs.zoomMap, funcs.progressRoute, funcs.moveDistance],
     },
