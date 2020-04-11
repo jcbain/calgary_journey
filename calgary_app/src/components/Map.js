@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { select } from 'd3-selection';
-import { geoAlbers, geoPath  } from 'd3-geo';
+import { geoAlbers, geoPath, geoProjectionMutator, geoOrthographicRaw, geoEquirectangularRaw  } from 'd3-geo';
+import { interpolate } from 'd3-interpolate';
+import { easeCubic} from 'd3-ease'
 import 'd3-transition';
 import 'd3-ease';
 
@@ -13,6 +15,7 @@ import provinces from '../data/canada';
 import mexico from '../data/mexico';
 import territories from '../data/selected_states_provinces';
 import routes from '../data/to_calgary';
+import { thresholdFreedmanDiaconis } from 'd3';
 
 class Map extends Component {
     constructor(props){
@@ -37,18 +40,19 @@ class Map extends Component {
     }
 
     
-
     mapRef = React.createRef();
+
     componentDidMount(){
+ 
+
+
+            
+        
+
+        // this.projection.rotate(this.rotate(1))
         console.log(this.state.history)
         console.log(this.projection([-92.3341, 38.9517]))
-        console.log(this.projection([-114.0719, 51.0447]))
-        console.log(this.projection.center())
-        // console.log(this.route)
-        // for(let i = 0; i < this.route.length; i++){
-        //     console.log(calculatePathDistanceMiles(this.route[i].geometry.coordinates[0]))
-        // }
-        
+        console.log(this.projection([-114.0719, 51.0447])) 
 
         let path = geoPath()
             .projection(this.projection);
@@ -97,7 +101,7 @@ class Map extends Component {
             .attr("id", (d, i) => `route-part-${i}`)
             .attr("d", path)
             .style('fill', 'none')
-            .attr('stroke-width', 0);
+            .attr('stroke-width', 0)
 
 
 
@@ -105,7 +109,6 @@ class Map extends Component {
 
 
     componentDidUpdate(){
- 
         console.log(this.state)
         this.props.funcs.map(d => {
             return d.call(this);
@@ -127,6 +130,5 @@ class Map extends Component {
         )
     }
 }
-
 
 export default Map;
