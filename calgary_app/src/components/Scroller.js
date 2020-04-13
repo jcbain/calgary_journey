@@ -25,8 +25,9 @@ class Scroller extends Component {
 
 
     onStepEnter = ({data, direction}) => {
+        let cumDist = (direction === "down" && this.state.data.leg !== data.leg) ? this.state.cumulativeDistance + data.distance : this.state.cumulativeDistance;
         let newVal = (direction === "down") ? this.state.data.distance + data.distance : this.state.data.distance - data.distance;
-        let cumDist = (direction === 'down') ? this.state.cumulativeDistance + data.distance : this.state.cumulativeDistance - data.distance
+        // let cumDist = (direction === 'down') ? this.state.cumulativeDistance + data.distance : this.state.cumulativeDistance - data.distance
         let distanceArray =  this.state.distance.concat(newVal)
         this.setState({data, direction, distance: distanceArray, currentDistance: data.distance, cumulativeDistance: cumDist})
         console.log(this.state)
