@@ -15,7 +15,6 @@ import provinces from '../data/canada';
 import mexico from '../data/mexico';
 import territories from '../data/selected_states_provinces';
 import routes from '../data/to_calgary';
-import { thresholdFreedmanDiaconis } from 'd3';
 
 class Map extends Component {
     constructor(props){

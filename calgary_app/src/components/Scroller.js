@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Scrollama, Step } from 'react-scrollama';
+import dist, { Scrollama, Step } from 'react-scrollama';
 
 import Map from './Map';
 import { trip } from '../data/trip';
+
+// import Car from '../icons/Car.svg'
 
 import './styles/scroller.css'
 
@@ -16,15 +18,18 @@ class Scroller extends Component {
             progress: 0,
             direction: undefined,
             distance: Array(0),
+            currentDistance: 0,
+            cumulativeDistance: 0
         }
     }
 
 
     onStepEnter = ({data, direction}) => {
         let newVal = (direction === "down") ? this.state.data.distance + data.distance : this.state.data.distance - data.distance;
+        let cumDist = (direction === 'down') ? this.state.cumulativeDistance + data.distance : this.state.cumulativeDistance - data.distance
         let distanceArray =  this.state.distance.concat(newVal)
-        this.setState({data, direction, distance: distanceArray})
-
+        this.setState({data, direction, distance: distanceArray, currentDistance: data.distance, cumulativeDistance: cumDist})
+        console.log(this.state)
     }
 
     onStepExit = ({ element, direction, data}) => {
@@ -37,6 +42,8 @@ class Scroller extends Component {
         return(
             <div className="main-scroller-container">
                 <div className="map-container">
+                    {/* <img src={Car} width={10}></img> */}
+                
                 <Map step={this.state.data.leg} 
                      zoom={this.state.data.zoom} 
                      moveY={this.state.data.moveY} 
