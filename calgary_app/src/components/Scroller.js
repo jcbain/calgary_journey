@@ -25,7 +25,17 @@ class Scroller extends Component {
 
 
     onStepEnter = ({data, direction}) => {
-        let cumDist = (direction === "down" && this.state.data.leg !== data.leg) ? this.state.cumulativeDistance + data.distance : this.state.cumulativeDistance;
+        let cumDist;
+        // TODO: what i need to check is if the previous direction AND the previous leg were
+        // the same as the current
+        if(direction === "down" && this.state.data.leg !== data.leg) {
+            cumDist = this.state.cumulativeDistance + data.distance;
+        } else if(direction === "up") {
+            cumDist = this.state.cumulativeDistance - data.distance
+        } else {
+            cumDist = this.state.cumulativeDistance;
+        }
+        // cumDist = (direction === "up" && this.state.data.leg !== data.leg) ? this.state.cumulativeDistance - data.distance : this.state.cumulativeDistance;
         let newVal = (direction === "down") ? this.state.data.distance + data.distance : this.state.data.distance - data.distance;
         // let cumDist = (direction === 'down') ? this.state.cumulativeDistance + data.distance : this.state.cumulativeDistance - data.distance
         let distanceArray =  this.state.distance.concat(newVal)
